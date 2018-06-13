@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalClear", "CrystalClear\CrystalClear.csproj", "{617B6070-2F68-41BF-9AF3-E8F2B75EAC68}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{72604BBC-9C86-4BC1-BDFA-46F025F65EC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{617B6070-2F68-41BF-9AF3-E8F2B75EAC68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{617B6070-2F68-41BF-9AF3-E8F2B75EAC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{617B6070-2F68-41BF-9AF3-E8F2B75EAC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{617B6070-2F68-41BF-9AF3-E8F2B75EAC68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72604BBC-9C86-4BC1-BDFA-46F025F65EC6}.Debug|Any CPU.ActiveCfg = Debug
+		{72604BBC-9C86-4BC1-BDFA-46F025F65EC6}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9ACC2EB-21AC-446B-A345-F90B8EF7BC94}
+	EndGlobalSection
+EndGlobal

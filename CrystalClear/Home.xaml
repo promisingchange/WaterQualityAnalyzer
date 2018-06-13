@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="CrystalClear.Home"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CrystalClear"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Margin="0 0 0 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:Card Width="200" Margin="8 8 8 8" Height="200" Background="#3F51B5" MouseLeftButtonDown="Analyzer_OnClick">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <materialDesign:PackIcon Kind="Poll" Width="80" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF"  Margin="0 20 0 0"  />
+                            <TextBlock Grid.Row="1" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 16"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" >Analyzer</TextBlock>
+                        </Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Width="200" Margin="8 8 8 8" Height="200" Background="#009688" MouseLeftButtonDown="Records_OnClick">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <materialDesign:PackIcon Kind="History" Width="80" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" Margin="0 20 0 0" />
+                            <TextBlock Grid.Row="1" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 16"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" >Records</TextBlock>
+                        </Grid>
+                    </materialDesign:Card>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <materialDesign:Card Width="200" Margin="8 8 8 8" Height="200" Background="#FF5722" MouseLeftButtonDown="Help_OnClick">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <materialDesign:PackIcon Kind="HelpCircleOutline" Width="80" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="#FFFFFF" Padding="0 16 0 0" Margin="0 20 0 0" />
+                            <TextBlock Grid.Row="1" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 16"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" >Help</TextBlock>
+                        </Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Width="200" Margin="8 8 8 8" Height="200" Background="#607D8B" MouseLeftButtonDown="Reservoirs_OnClick">
+                        <Grid VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <materialDesign:PackIcon Kind="Keg" Width="80" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="#FFFFFF" Margin="0 20 0 0"  />
+                            <TextBlock Grid.Row="1" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16 16 16 16"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFF" >Reservoirs</TextBlock>
+                        </Grid>
+                    </materialDesign:Card>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

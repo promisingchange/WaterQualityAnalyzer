@@ -1,0 +1,359 @@
+﻿<UserControl x:Class="CrystalClear.RecordManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CrystalClear"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800"
+             Loaded="RecordManager_Loaded">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DataGrid.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <ScrollViewer>
+        <StackPanel Name="Container" Margin="32">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox 
+                          Name="ReservoirComboBox"
+                          materialDesign:HintAssist.Hint="Reservoir" 
+                          ItemsSource="{Binding Path=ReservoirsForView}"   
+                          SelectedItem="{Binding Path=ReservoirForView}"
+                          DisplayMemberPath="Name"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                          FontSize="18" Margin="0 0 16 16" Width="150"
+                      HorizontalAlignment="Left"
+                      SelectionChanged="ReservoirComboBox_SelectionChanged">
+                </ComboBox>
+                <ComboBox 
+                          Name="ViewMethodComboBox"
+                          materialDesign:HintAssist.Hint="View Method"
+                          ItemsSource="{Binding Path=ViewMethods}"   
+                          SelectedItem="{Binding Path=ViewMethod}"  
+                          DisplayMemberPath="Name"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                          FontSize="18" Margin="16 0 16 16" Width="150"
+                      HorizontalAlignment="Left"
+                      SelectionChanged="ViewMethodComboBox_SelectionChanged">
+                </ComboBox>
+            </StackPanel>
+            <DataGrid Name="RecordsListBox" Margin="0 8 0 0" ItemsSource="{Binding Records}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+                          materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                      ColumnWidth="*"
+                      SelectionChanged="RecordsListBox_SelectionChanged">
+                <DataGrid.Columns>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding ReservoirName}"
+                                                               Header="Reservoir">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding DateTime}"
+                                                               Header="Date">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding TemperatureRange}"
+                                                               Header="Temperature">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding PH}"
+                                                               Header="PH(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding DO}"
+                                                               Header="DO(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding BOD5}"
+                                                               Header="BOD5(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding COD}"
+                                                               Header="COD(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding NH4N}"
+                                                               Header="NH4-N(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding NO2N}"
+                                                               Header="NO2-N(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding NO3N}"
+                                                               Header="NO3-N(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding SS}"
+                                                               Header="SS(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding CL}"
+                                                               Header="CL(mg/L)">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding CB}"
+                                                               Header="CB">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Overall}"
+                                                               Header="Overall">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                    <materialDesign:MaterialDataGridTextColumn Binding="{Binding Level}"
+                                                               Header="Level">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </materialDesign:MaterialDataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 16 0 0">
+                <Button Name="DeleteButton" Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="16 0 0 16" Click="Delete_OnClick"
+                            MinWidth="100" MaxWidth="150">Delete</Button>
+            </StackPanel>
+            <Grid Name="AnalyzerPanel">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="150"/>
+                    <ColumnDefinition Width="*" MinWidth="150"/>
+                    <ColumnDefinition Width="*" MinWidth="150"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0 0 16 16" MinWidth="100">
+                    <TextBlock Text="{Binding Date, StringFormat=yyyy/MM/dd}" VerticalAlignment="Center" FontSize="18" />
+                    <Button Margin="8 0 0 0" Content="..." Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" materialDesign:DialogHost.DialogOpenedAttached="CalendarDialogOpenedEventHandler" materialDesign:DialogHost.DialogClosingAttached="CalendarDialogClosingEventHandler">
+                        <Button.CommandParameter>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Calendar x:Name="Calendar" Margin="-1 -4 -1 0" />
+                                <StackPanel Grid.Row="1" Margin="8" HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="1" Style="{DynamicResource MaterialDesignFlatButton}">OK</Button>
+                                    <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" CommandParameter="0" Style="{DynamicResource MaterialDesignFlatButton}">CANCEL</Button>
+                                </StackPanel>
+                            </Grid>
+                        </Button.CommandParameter>
+                    </Button>
+                </StackPanel>
+                <ComboBox Grid.Row="0" Grid.Column="1"
+                          Name="ReservoirListComboBox"
+                          materialDesign:HintAssist.Hint="Reservoir" 
+                          ItemsSource="{Binding Path=Reservoirs}"
+                          SelectedItem="{Binding Path=Reservoir}"  
+                          DisplayMemberPath="Name"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                          FontSize="18" Margin="0 0 16 16" MinWidth="100">
+
+                </ComboBox>
+                <ComboBox Grid.Row="1" Grid.Column="0" 
+                          materialDesign:HintAssist.Hint="Temperature" 
+                          ItemsSource="{Binding Path=TemperatureRange}"   
+                          SelectedItem="{Binding Path=Temperature}"  
+                          DisplayMemberPath="TemperatureRange"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+                          FontSize="18" Margin="0 0 16 16" MinWidth="100">
+                </ComboBox>
+                <TextBox Name="TextPH" Grid.Row="2" Grid.Column="0" materialDesign:HintAssist.Hint="PH" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding PH}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextDO" Grid.Row="2" Grid.Column="1" materialDesign:HintAssist.Hint="DO" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding DO}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextBOD5" Grid.Row="3" Grid.Column="0" materialDesign:HintAssist.Hint="BOD5" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding BOD5}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextCOD" Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="COD" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding COD}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextNH4N" Grid.Row="4" Grid.Column="0" materialDesign:HintAssist.Hint="NH4-N" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding NH4N}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextNO2N" Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="NO2-N" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding NO2N}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextNO3N" Grid.Row="5" Grid.Column="0" materialDesign:HintAssist.Hint="NO3-N" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding NO3N}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextSS" Grid.Row="5" Grid.Column="1" materialDesign:HintAssist.Hint="SS" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding SS}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextCL" Grid.Row="6" Grid.Column="0" materialDesign:HintAssist.Hint="CL" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding CL}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <TextBox Name="TextCB" Grid.Row="6" Grid.Column="1" materialDesign:HintAssist.Hint="CB" materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0" materialDesign:HintAssist.FloatingScale="0.50" Text="{Binding CB}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="18" Margin="0 0 16 16"  MinWidth="100" PreviewTextInput="NumericOnly"/>
+                <StackPanel Grid.Row="7" Grid.Column="1" Name="AnalyzeContainer">
+                    <Button Name="AnalyzeButton" Style="{StaticResource MaterialDesignRaisedButton}" Margin="0 0 16 16" Click="Analyze_OnClick" 
+                            MinWidth="100" MaxWidth="150" HorizontalAlignment="Right"
+                            Width="{Binding ElementName=AnalyzeContainer,Path=ActualWidth}">Analyze</Button>
+                </StackPanel>
+                <materialDesign:Card Grid.Row="2" Grid.Column="2" Grid.RowSpan="4" Background="#2196F3" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="0" MinWidth="180" MaxWidth="200">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="8 8 8 8" VerticalAlignment="Center">Overall Index:</TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="8 8 8 8" FontSize="16" Text="{Binding OverallIndex}"></TextBlock>
+                        <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignLightSeparator}" Height="3"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="8 8 8 8" VerticalAlignment="Center">Level:</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="8 8 8 8" FontSize="18" Text="{Binding Level}"></TextBlock>
+                        <Separator Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignLightSeparator}"  Height="3"/>
+                        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical">
+                            <TextBlock 
+                                Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Center" 
+                                Margin="8 8 8 8"
+                                Text="{Binding Explanation}">
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
+                <StackPanel Grid.Row="7" Grid.Column="3" Name="SaveContainer">
+                    <Button Name="SaveButton" Style="{StaticResource MaterialDesignRaisedButton}" Margin="0 0 16 16" Click="Save_OnClick" 
+                            MinWidth="100" MaxWidth="150" HorizontalAlignment="Center"
+                            Width="{Binding ElementName=SaveContainer,Path=ActualWidth}">Save</Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
